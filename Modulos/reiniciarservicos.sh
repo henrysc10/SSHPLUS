@@ -17,7 +17,7 @@ fun_prog ()
 	tput cnorm
 	echo -e "\e[1DOK"
 }
-echo -ne "\033[1;33mREINICIANDO OPEN@henrysc10 "; fun_prog 'service @henrysc10 restart'
+echo -ne "\033[1;33mREINICIANDO OPENSSH "; fun_prog 'service ssh restart'
 echo ""
 sleep 1
 if [[ -e /etc/squid/squid.conf ]]; then

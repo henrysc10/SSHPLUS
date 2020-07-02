@@ -4,7 +4,7 @@ comando[0]="$1"
 comando[1]="$2"
  (
 [[ -e $HOME/fim ]] && rm $HOME/fim
-[[ ! -e /usr/lib/INOVE SSH ]] && rm -rf /bin/menu > /dev/null 2>&1
+[[ ! -e /usr/lib/sshplus ]] && rm -rf /bin/menu > /dev/null 2>&1
 ${comando[0]} -y > /dev/null 2>&1
 ${comando[1]} -y > /dev/null 2>&1
 touch $HOME/fim
@@ -36,7 +36,7 @@ comando[0]="$1"
 comando[1]="$2"
  (
 [[ -e $HOME/fim ]] && rm $HOME/fim
-[[ ! -d /etc/INOVE SSH ]] && rm -rf /bin/menu
+[[ ! -d /etc/SSHPlus ]] && rm -rf /bin/menu
 ${comando[0]} > /dev/null 2>&1
 ${comando[1]} > /dev/null 2>&1
 touch $HOME/fim
@@ -112,7 +112,7 @@ function limit2 () {
    sleep 3
    menu
 }
-function limit_@henrysc10 () {
+function limit_ssh () {
 [[ $(ps x | grep "limiter"|grep -v grep |wc -l) = '0' ]] && limit1 || limit2
 }
 
@@ -162,8 +162,8 @@ system+=$(cut -d' ' -f3 /etc/issue.net)
 else
 system=$(cut -d' ' -f1 /etc/issue.net)
 fi
-_ons=$(ps -x | grep @henrysc10d | grep -v root | grep priv | wc -l)
-[[ "$(cat /etc/INOVE SSH/Exp)" != "" ]] && _expuser=$(cat /etc/INOVE SSH/Exp) || _expuser="0"
+_ons=$(ps -x | grep sshd | grep -v root | grep priv | wc -l)
+[[ "$(cat /etc/SSHPlus/Exp)" != "" ]] && _expuser=$(cat /etc/SSHPlus/Exp) || _expuser="0"
 [[ -e /etc/openvpn/openvpn-status.log ]] && _onop=$(grep -c "10.8.0" /etc/openvpn/openvpn-status.log) || _onop="0"
 [[ -e /etc/default/dropbear ]] && _drp=$(ps aux | grep dropbear | grep -v grep | wc -l) _ondrp=$(($_drp - 1)) || _ondrp="0"
 _onli=$(($_ons + $_onop + $_ondrp))
@@ -178,7 +178,7 @@ _userexp=$(printf '%-5s' "$_expuser")
 _tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
 clear
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\E[41;1;37m               ⇱ INOVE SSH MANAGER ⇲                \E[0m"
+echo -e "\E[41;1;37m               ⇱ INOVE MANAGER ⇲                \E[0m"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "\033[1;32mSISTEMA            MEMÓRIA RAM      PROCESSADOR "
 echo -e "\033[1;31mOS: \033[1;37m$_system \033[1;31mTotal:\033[1;37m$_ram \033[1;31mNucleos: \033[1;37m$_core\033[0m"
@@ -229,7 +229,7 @@ case "$x" in
    blockt
    ;;
    25)
-   bot@henrysc10
+   botssh
    ;;
    26)
    clear
@@ -275,8 +275,8 @@ system+=$(cut -d' ' -f3 /etc/issue.net)
 else
 system=$(cut -d' ' -f1 /etc/issue.net)
 fi
-_ons=$(ps -x | grep @henrysc10d | grep -v root | grep priv | wc -l)
-[[ "$(cat /etc/INOVE SSH/Exp)" != "" ]] && _expuser=$(cat /etc/INOVE SSH/Exp) || _expuser="0"
+_ons=$(ps -x | grep sshd | grep -v root | grep priv | wc -l)
+[[ "$(cat /etc/SSHPlus/Exp)" != "" ]] && _expuser=$(cat /etc/SSHPlus/Exp) || _expuser="0"
 [[ -e /etc/openvpn/openvpn-status.log ]] && _onop=$(grep -c "10.8.0" /etc/openvpn/openvpn-status.log) || _onop="0"
 [[ -e /etc/default/dropbear ]] && _drp=$(ps aux | grep dropbear | grep -v grep | wc -l) _ondrp=$(($_drp - 1)) || _ondrp="0"
 _onli=$(($_ons + $_onop + $_ondrp))
@@ -291,7 +291,7 @@ _userexp=$(printf '%-5s' "$_expuser")
 _tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
 clear
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\E[41;1;37m               ⇱ INOVE SSH MANAGER ⇲                \E[0m"
+echo -e "\E[41;1;37m               ⇱ INOVE MANAGER ⇲                \E[0m"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "\033[1;32mSISTEMA            MEMÓRIA RAM      PROCESSADOR "
 echo -e "\033[1;31mOS: \033[1;37m$_system \033[1;31mTotal:\033[1;37m$_ram \033[1;31mNucleos: \033[1;37m$_core\033[0m"
@@ -333,7 +333,7 @@ case "$x" in
    ;;
    4 | 04)
    clear
-   @henrysc10monitor
+   sshmonitor
    echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
    ;;      
    5 | 05)
@@ -392,7 +392,7 @@ case "$x" in
    echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
    ;;
    16)
-   limit_@henrysc10
+   limit_ssh
    ;;
    17)
    clear

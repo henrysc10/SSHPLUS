@@ -1,5 +1,5 @@
 #!/bin/bash
-[[ ! -d /etc/INOVE SSH ]] && exit 0
+[[ ! -d /etc/SSHPlus ]] && exit 0
 [[ ! -d /etc/bot ]] && exit 0
 source ShellBot.sh
 api_bot=$1
@@ -15,11 +15,11 @@ ajuda ()
     if [[ "${message_from_id[$id]}" = "$id_admin" ]]; then
         local env_msg
         env_msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-        env_msg+="<b>BEM VINDO(a) AO BOT INOVE SSH</b>\n"
+        env_msg+="<b>BEM VINDO(a) AO BOT INOVE SSHPLUS</b>\n"
         env_msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
         env_msg+="⚠️ <i>Comandos Disponiveis</i>\n\n"
         env_msg+="[<b>01</b>] /criarusuario = Cria usuario\n"
-        env_msg+="[<b>02</b>] /criarteste = Cria teste @henrysc10\n"
+        env_msg+="[<b>02</b>] /criarteste = Cria teste ssh\n"
         env_msg+="[<b>03</b>] /remover = Remove usuario\n"
         env_msg+="[<b>04</b>] /infousers = Info usuarios\n"
         env_msg+="[<b>05</b>] /monitor = Usuários onlines\n"
@@ -43,11 +43,11 @@ ajuda ()
     elif [[ -d /etc/bot/revenda/${message_from_username} ]]; then
         local env_msg1
         env_msg1="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-        env_msg1+="<b>BEM VINDO(a) AO BOT INOVE SSH</b>\n"
+        env_msg1+="<b>BEM VINDO(a) AO BOT INOVE SSHPLUS</b>\n"
         env_msg1+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
         env_msg1+="⚠️ <i>Comandos Disponiveis</i>\n\n"
         env_msg1+="[<b>01</b>] /criarusuario = Cria usuario\n"
-        env_msg1+="[<b>02</b>] /criarteste = Cria teste @henrysc10\n"
+        env_msg1+="[<b>02</b>] /criarteste = Cria teste ssh\n"
         env_msg1+="[<b>03</b>] /remover = Remove usuario\n"
         env_msg1+="[<b>04</b>] /infousers = Info usuarios\n"
         env_msg1+="[<b>05</b>] /monitor = Usuários onlines\n"
@@ -82,7 +82,7 @@ fun_revenda() {
     }
     local env_msg1
     env_msg1="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-    env_msg1+="<b>MENU REVENDA BOT INOVE SSH</b>\n"
+    env_msg1+="<b>MENU REVENDA BOT INOVE SSHPLUS</b>\n"
     env_msg1+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
     env_msg1+="⚠️ <i>Comandos Disponiveis</i>\n\n"
     env_msg1+="[<b>01</b>] /add_revenda = Cria\n"
@@ -103,8 +103,8 @@ fun_ajuda() {
     if [[ "${message_from_id[$id]}" = "$id_admin" ]]; then
         local env_msg
         env_msg+="⚠️ <b>COMANDOS E SUAS FUNCOES</b>\n\n"
-        env_msg+="<b>1</b> /criarusuario - <code>cria usuario @henrysc10</code>\n\n"
-        env_msg+="<b>2</b> /remover - <code>Remove usuario @henrysc10</code>\n\n"
+        env_msg+="<b>1</b> /criarusuario - <code>cria usuario ssh</code>\n\n"
+        env_msg+="<b>2</b> /remover - <code>Remove usuario ssh</code>\n\n"
         env_msg+="<b>3</b> /infousers - <code>Exibe informacoes do usuarios</code>\n\n"
         env_msg+="<b>4</b> /monitor - <code>Exibe usuarios online</code>\n\n"
         env_msg+="<b>5</b> /infovps - <code>Exibe informacoes do vps</code>\n\n"
@@ -123,7 +123,7 @@ fun_ajuda() {
         env_msg+="<b>18</b> /listar_revenda - <code>Exibe revendedores ativos e suspensos</code>\n\n"
         env_msg+="<b>19</b> /suspender - <code>Suspende revendedor e as contas criadas por ele</code>\n\n"
         env_msg+="<b>20</b> /relatorio - <code>Exibe relatorio dos revendedores</code>\n\n"
-        env_msg+="<b>21</b> /criarteste - <code>Cria usuario @henrysc10 aleatorio temporario</code>\n\n"
+        env_msg+="<b>21</b> /criarteste - <code>Cria usuario ssh aleatorio temporario</code>\n\n"
         env_msg+="<b>22</b> /expirados - <code>Remove os usuarios expirados</code>\n\n"
         env_msg+="<b>23</b> /autobackup - <code>Ativa o backup automatico</code>\n\n"
         env_msg+="<b>24</b> /sobre - <code>creditos / informacoes</code>\n\n"
@@ -135,17 +135,17 @@ fun_ajuda() {
     elif [[ -d /etc/bot/revenda/${message_from_username} ]]; then
         local env_msg
         env_msg+="⚠️ <b>COMANDOS E SUAS FUNCOES</b>\n\n"
-        env_msg+="<b>1</b> /criarusuario - <code>cria usuario @henrysc10</code>\n\n"
-        env_msg+="<b>2</b> /remover - <code>Remove usuario @henrysc10</code>\n\n"
+        env_msg+="<b>1</b> /criarusuario - <code>cria usuario ssh</code>\n\n"
+        env_msg+="<b>2</b> /remover - <code>Remove usuario ssh</code>\n\n"
         env_msg+="<b>3</b> /infousers - <code>Exibe informacoes do usuarios</code>\n\n"
         env_msg+="<b>4</b> /monitor - <code>Exibe usuarios online</code>\n\n"
         env_msg+="<b>5</b> /infovps - <code>Exibe informacoes do vps</code>\n\n"
         env_msg+="<b>6</b> /alterarsenha - <code>Altera a senha do usuario</code>\n\n"
         env_msg+="<b>7</b> /alterarlimite - <code>Altera o limite do usuario</code>\n\n"
-        env_msg+="<b>8</b> /criarteste - <code>Cria usuario @henrysc10 aleatorio temporario</code>\n\n"
+        env_msg+="<b>8</b> /criarteste - <code>Cria usuario ssh aleatorio temporario</code>\n\n"
         env_msg+="<b>9</b> /expirados - <code>Remove usuarios expirados</code>\n\n"
         env_msg+="<b>10</b> /relatorio - <code>Exibe Informacoes</code>\n\n"
-        env_msg+="<b>11</b> /alterardata - <code>Remove usuario @henrysc10</code>\n\n"
+        env_msg+="<b>11</b> /alterardata - <code>Remove usuario ssh</code>\n\n"
         env_msg+="<b>12</b> /sobre - <code>creditos / informacoes</code>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
             --text "$(echo -e $env_msg)" \
@@ -209,7 +209,7 @@ ver_users ()
                     limite=$(cat /etc/bot/info-users/$user|awk -F : {'print $4'})
                     info+="$user - $senha - $limite - $data"
                 else
-                    [[ -e /etc/INOVE SSH/senha/$user ]] && senha2=$(cat /etc/INOVE SSH/senha/$user) || senha2=null
+                    [[ -e /etc/SSHPlus/senha/$user ]] && senha2=$(cat /etc/SSHPlus/senha/$user) || senha2=null
                     [[ $(grep -wc "$user" $HOME/usuarios.db) != '0' ]] && limite2=$(grep -wi $user $HOME/usuarios.db |cut -d' ' -f2) || limite2='null'
                     info+="$user - $senha2 - $limite2 - null"
                 fi
@@ -247,7 +247,7 @@ ver_users ()
                     limite=$(cat /etc/bot/revenda/$cliente/usuarios/$user|awk -F : {'print $4'})
                     info+="$user - $senha - $limite - $data"
                 else
-                    [[ -e /etc/INOVE SSH/senha/$user ]] && senha2=$(cat /etc/INOVE SSH/senha/$user) || senha2=null
+                    [[ -e /etc/SSHPlus/senha/$user ]] && senha2=$(cat /etc/SSHPlus/senha/$user) || senha2=null
                     [[ $(grep -wc "$user" $HOME/usuarios.db) != '0' ]] && limite2=$(grep -wi $user $HOME/usuarios.db |cut -d' ' -f2) || limite2='null'
                     info+="$user - $senha2 - $limite2 - null"
                 fi
@@ -269,7 +269,7 @@ ver_users ()
     fi
 }
 
-monitor_@henrysc102() {
+monitor_ssh2() {
     fun_drop () {
         port_dropbear=`ps aux | grep dropbear | awk NR==1 | awk '{print $17;}'`
         log=/var/log/auth.log
@@ -321,11 +321,11 @@ monitor_@henrysc102() {
                 [[ "$(grep -w $user $database)" != "0" ]] && lim="$(grep -w $user $database| cut -d' ' -f2)" || lim=0
                 [[ $(netstat -nltp|grep 'dropbear'| wc -l) != '0' ]] && drop="$(fun_drop | grep "$user" | wc -l)" || drop=0
                 [[ -e /etc/openvpn/openvpn-status.log ]] && ovp="$(cat /etc/openvpn/openvpn-status.log | grep -E ,"$user", | wc -l)" || ovp=0
-                sqd="$(ps -u $user | grep @henrysc10d | wc -l)"
+                sqd="$(ps -u $user | grep sshd | wc -l)"
                 _cont=$(($drop + $ovp))
                 conex=$(($_cont + $sqd))
                 if [[ $conex -gt '0' ]]; then
-                    timerr="$(ps -o etime $(ps -u $user |grep @henrysc10d |awk 'NR==1 {print $1}')|awk 'NR==2 {print $1}')"
+                    timerr="$(ps -o etime $(ps -u $user |grep sshd |awk 'NR==1 {print $1}')|awk 'NR==2 {print $1}')"
                     info2+="------------------------------\n"
                     info2+="👤$user       $conex/$lim       ⏳$timerr\n"
                 fi
@@ -369,11 +369,11 @@ monitor_@henrysc102() {
                 [[ "$(grep -w $user $database)" != "0" ]] && lim="$(grep -w $user $database| cut -d' ' -f2)" || lim=0
                 [[ $(netstat -nltp|grep 'dropbear'| wc -l) != '0' ]] && drop="$(fun_drop | grep "$user" | wc -l)" || drop=0
                 [[ -e /etc/openvpn/openvpn-status.log ]] && ovp="$(cat /etc/openvpn/openvpn-status.log | grep -E ,"$user", | wc -l)" || ovp=0
-                sqd="$(ps -u $user | grep @henrysc10d | wc -l)"
+                sqd="$(ps -u $user | grep sshd | wc -l)"
                 _cont=$(($drop + $ovp))
                 conex=$(($_cont + $sqd))
                 if [[ $conex -gt '0' ]]; then
-                    timerr="$(ps -o etime $(ps -u $user |grep @henrysc10d |awk 'NR==1 {print $1}')|awk 'NR==2 {print $1}')"
+                    timerr="$(ps -o etime $(ps -u $user |grep sshd |awk 'NR==1 {print $1}')|awk 'NR==2 {print $1}')"
                     info2+="------------------------------\n"
                     info2+="👤$user       $conex/$lim       ⏳$timerr\n"
                 fi
@@ -445,7 +445,7 @@ rm -rf /tmp/online.txt > /dev/null
 for user in $(cat /etc/passwd|awk -F : '$3 >= 1000 {print $1}'|grep -v nobody)
 do
     [[ -e '/etc/init.d/dropbear' ]] && echo -e "$(fun_drop2 | grep "$user" | wc -l)" >> /tmp/online.txt
-    [[ $(ps -u $user |grep @henrysc10d |wc -l) -gt '0' ]] && echo -e "$(ps -u $user |grep @henrysc10d |wc -l)" >> /tmp/online.txt
+    [[ $(ps -u $user |grep sshd |wc -l) -gt '0' ]] && echo -e "$(ps -u $user |grep sshd |wc -l)" >> /tmp/online.txt
     [[ -e /etc/openvpn/openvpn-status.log ]] && echo -e "$(grep -E ,"$user", /etc/openvpn/openvpn-status.log | wc -l)" >> /tmp/online.txt
 done
 [[ $(paste -s -d + /tmp/online.txt | bc) -gt '0' ]] && on="$(paste -s -d + /tmp/online.txt | bc)" || on=0
@@ -455,7 +455,7 @@ cpucores=$(grep -c cpu[0-9] /proc/stat)
 ram1=$(free -h | grep -i mem | awk {'print $2'})
 usoram=$(free -m | awk 'NR==2{printf "%.2f%%\t\t", $3*100/$2 }')
 total=$(cat -n /root/usuarios.db | tail -n 1 | awk '{print $1}')
-echo -e "@henrysc10: $(grep 'Port' /etc/@henrysc10/@henrysc10d_config|cut -d' ' -f2 |grep -v 'no' |xargs)" > $PTs
+echo -e "SSH: $(grep 'Port' /etc/ssh/sshd_config|cut -d' ' -f2 |grep -v 'no' |xargs)" > $PTs
 [[ -e "/etc/stunnel/stunnel.conf" ]] && echo -e "SSL Tunel: $(netstat -nplt |grep 'stunnel' | awk {'print $4'} |cut -d: -f2 |xargs)" >> $PTs
 [[ -e "/etc/openvpn/server.conf" ]] && echo -e "Openvpn: $(netstat -nplt |grep 'openvpn' |awk {'print $4'} |cut -d: -f2 |xargs)" >> $PTs
 [[ "$(netstat -nplt |grep 'sslh' | wc -l)" != '0' ]] && echo -e "SSlh: $(netstat -nplt |grep 'sslh' |awk {'print $4'} |cut -d: -f2 |xargs)" >> $PTs
@@ -546,9 +546,9 @@ backup_users ()
 backup_auto ()
 {
     ShellBot.sendDocument --chat_id ${id_admin} \
-    --document "@/etc/INOVE SSH/backups/backup.vps" \
+    --document "@/etc/SSHPlus/backups/backup.vps" \
     --caption "$(echo -e "♻️ BACKUP AUTOMATICO ♻️")"
-    rm /etc/INOVE SSH/backups/backup.vps
+    rm /etc/SSHPlus/backups/backup.vps
     return 0
 }
 
@@ -602,10 +602,10 @@ payloads ()
 sobremim() {
     local msg
         msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-        msg+="<b>🤖 BOT INOVE SSH MANAGER 🤖</b>\n"
+        msg+="<b>🤖 BOT INOVE MANAGER 🤖</b>\n"
         msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
         msg+="<b>Desenvolvido por:</b> @henrysc10\n"
-        msg+="<b>Canal Oficial:</b> @INOVE SSH\n\n"
+        msg+="<b>Canal Oficial:</b> @inoveinternet\n\n"
         msg+="Fui criado com o propósito de fornecer informações e ferramentas para gestao de vps 🐧 GNU/Linux 🐧 com foco em uso VPN\n\n"
         msg+="<b>Menu:</b> /menu\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
@@ -695,11 +695,11 @@ fun_deluser () {
 fun_del_user () {
     usuario=$1
     [[ "${message_from_id[$id]}" = "$id_admin" ]] && {
-        piduser=$(ps -u "$usuario" |grep @henrysc10d |cut -d? -f1)
+        piduser=$(ps -u "$usuario" |grep sshd |cut -d? -f1)
         kill -9 $piduser > /dev/null 2>&1
         userdel --force "$usuario" 2>/dev/null
         grep -v ^$usuario[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
-        rm /etc/INOVE SSH/senha/$usuario > /dev/null 2>&1
+        rm /etc/SSHPlus/senha/$usuario > /dev/null 2>&1
         rm /etc/bot/info-users/$usuario
     } || {
         [[ ! -e /etc/bot/revenda/${message_from_username}/usuarios/$usuario ]] && {
@@ -708,14 +708,14 @@ fun_del_user () {
              --parse_mode html
              return 0
         }
-        piduser=$(ps -u "$usuario" |grep @henrysc10d |cut -d? -f1)
+        piduser=$(ps -u "$usuario" |grep sshd |cut -d? -f1)
         kill -9 $piduser > /dev/null 2>&1
         userdel --force "$usuario" 2>/dev/null
         grep -v ^$usuario[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
-        rm /etc/INOVE SSH/senha/$usuario > /dev/null 2>&1
+        rm /etc/SSHPlus/senha/$usuario > /dev/null 2>&1
         rm /etc/bot/revenda/${message_from_username}/usuarios/$usuario
     }
-    [[ -e /etc/INOVE SSH/userteste/$usuario.sh ]] && at -f /etc/INOVE SSH/userteste/$usuario.sh now + 1 min > /dev/null 2>&1
+    [[ -e /etc/SSHPlus/userteste/$usuario.sh ]] && at -f /etc/SSHPlus/userteste/$usuario.sh now + 1 min > /dev/null 2>&1
     [[ -e "/etc/openvpn/easy-rsa/pki/private/$usuario.key" ]] && {
         [[ -e /etc/debian_version ]] && GROUPNAME=nogroup
         cd /etc/openvpn/easy-rsa/
@@ -775,7 +775,7 @@ criar_user ()
         return 0
     fi
     echo "$usuario $limite" >> /root/usuarios.db
-    echo "$senha" > /etc/INOVE SSH/senha/$usuario
+    echo "$senha" > /etc/SSHPlus/senha/$usuario
     [[ -e "/etc/openvpn/server.conf" ]] && {
         cd /etc/openvpn/easy-rsa/
         ./easyrsa build-client-full $usuario nopass
@@ -811,7 +811,7 @@ alterar_senha_user ()
     senha=$2
     [[ "${message_from_id[$id]}" = "$id_admin" ]] && {
         echo "$usuario:$senha" | chpasswd
-        [[ -e /etc/bot/info-users/$usuario ]]  && senha2=$(cat /etc/bot/info-users/$usuario|awk  -F : {'print $2'}) || senha2=$(cat /etc/INOVE SSH/senha/$usuario)
+        [[ -e /etc/bot/info-users/$usuario ]]  && senha2=$(cat /etc/bot/info-users/$usuario|awk  -F : {'print $2'}) || senha2=$(cat /etc/SSHPlus/senha/$usuario)
         sed -i "s/\b$senha2\b/$senha/g" /etc/bot/info-users/$usuario
     } || {
         [[ ! -e /etc/bot/revenda/${message_from_username}/usuarios/$usuario ]] && {
@@ -821,10 +821,10 @@ alterar_senha_user ()
              return 0
         }
         echo "$usuario:$senha" | chpasswd
-        [[ -e /etc/bot/revenda/${message_from_username} ]]  && senha2=$(cat /etc/bot/revenda/${message_from_username}/usuarios/$usuario|awk  -F : {'print $2'}) || senha2=$(cat /etc/INOVE SSH/senha/$usuario)
+        [[ -e /etc/bot/revenda/${message_from_username} ]]  && senha2=$(cat /etc/bot/revenda/${message_from_username}/usuarios/$usuario|awk  -F : {'print $2'}) || senha2=$(cat /etc/SSHPlus/senha/$usuario)
         sed -i "s/\b$senha2\b/$senha/g" /etc/bot/revenda/${message_from_username}/usuarios/$usuario
     }
-    echo "$senha" > /etc/INOVE SSH/senha/$usuario
+    echo "$senha" > /etc/SSHPlus/senha/$usuario
     pkill -f $usuario > /dev/null 2>&1
 }
 
@@ -1077,7 +1077,7 @@ del_rev() {
     [[ -d /etc/bot/revenda/$_cli_rev ]] && {
         [[ "$(ls /etc/bot/revenda/$_cli_rev/usuarios| wc -l)" != '0' ]] && {
             for _user in $(ls /etc/bot/revenda/$_cli_rev/usuarios); do
-                piduser=$(ps -u "$_user" |grep @henrysc10d |cut -d? -f1)
+                piduser=$(ps -u "$_user" |grep sshd |cut -d? -f1)
                 kill -9 $piduser > /dev/null 2>&1
                 userdel --force "$_user" 2>/dev/null
                 grep -v ^$_user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
@@ -1088,7 +1088,7 @@ del_rev() {
     [[ -d /etc/bot/suspensos/$_cli_rev ]] && {
         [[ "$(ls /etc/bot/suspensos/$_cli_rev/usuarios| wc -l)" != '0' ]] && {
             for _user in $(ls /etc/bot/revenda/$_cli_rev/usuarios); do
-                piduser=$(ps -u "$_user" |grep @henrysc10d |cut -d? -f1)
+                piduser=$(ps -u "$_user" |grep sshd |cut -d? -f1)
                 kill -9 $piduser > /dev/null 2>&1
                 userdel --force "$_user" 2>/dev/null
                 grep -v ^$_user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
@@ -1239,7 +1239,7 @@ susp_rev() {
 relatorio_rev() {
     verifica_suspenso ${message_from_username}
     if [[ "${message_from_id[$id]}" = "$id_admin" ]]; then
-        _ons=$(ps -x | grep @henrysc10d | grep -v root | grep priv | wc -l)
+        _ons=$(ps -x | grep sshd | grep -v root | grep priv | wc -l)
         _tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
         [[ -e /etc/openvpn/openvpn-status.log ]] && _onop=$(grep -c "10.8.0" /etc/openvpn/openvpn-status.log) || _onop="0"
         [[ -e /etc/default/dropbear ]] && _drp=$(ps aux | grep dropbear | grep -v grep | wc -l) _ondrp=$(($_drp - 1)) || _ondrp="0"
@@ -1276,7 +1276,7 @@ relatorio_rev() {
                 touch /tmp/online.txt
                 for user in $(ls /etc/bot/revenda/$_nomeR/usuarios); do
                     [[ -e '/etc/init.d/dropbear' ]] && echo -e "$(fun_drop2 | grep "$user" | wc -l)" >> /tmp/online.txt
-                    [[ $(ps -u $user |grep @henrysc10d |wc -l) -gt '0' ]] && echo -e "$(ps -u $user |grep @henrysc10d |wc -l)" >> /tmp/online.txt
+                    [[ $(ps -u $user |grep sshd |wc -l) -gt '0' ]] && echo -e "$(ps -u $user |grep sshd |wc -l)" >> /tmp/online.txt
                     [[ -e /etc/openvpn/openvpn-status.log ]] && echo -e "$(grep -E ,"$user", /etc/openvpn/openvpn-status.log | wc -l)" >> /tmp/online.txt
                 done
                 [[ $(paste -s -d + /tmp/online.txt | bc) -gt '0' ]] && on="$(paste -s -d + /tmp/online.txt | bc)" || on=0
@@ -1285,7 +1285,7 @@ relatorio_rev() {
                 on=0
                 total_U=$(ls /etc/bot/revenda/$_nomeR/usuarios| wc -l)
             }
-            echo -e "\nREVENDEDOR: @$_nomeR\nLIMITE: $_limiteR\nDIAS RESTANTES: $_diasR\n@henrysc10 CRIADAS: $total_U\n@henrysc10 ONLINE: $on\n\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=" >> /tmp/Relatorio.txt
+            echo -e "\nREVENDEDOR: @$_nomeR\nLIMITE: $_limiteR\nDIAS RESTANTES: $_diasR\nSSH CRIADAS: $total_U\nSSH ONLINE: $on\n\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=" >> /tmp/Relatorio.txt
         done
         [[ "$(ls /etc/bot/suspensos| wc -l)" != '0' ]] && {
             for arq2 in $(ls /etc/bot/suspensos); do
@@ -1316,7 +1316,7 @@ relatorio_rev() {
             var2=$(cat $_Dir_users/$i| awk  -F : {'print $4'})
             _lim1=$(echo "${_lim1} + ${var2}"| bc)
             [[ -e '/etc/init.d/dropbear' ]] && echo -e "$(fun_drop2 | grep "$i" | wc -l)" >> $on_user_rev
-            [[ $(ps -u $i |grep @henrysc10d |wc -l) -gt '0' ]] && echo -e "$(ps -u $i |grep @henrysc10d |wc -l)" >> $on_user_rev
+            [[ $(ps -u $i |grep sshd |wc -l) -gt '0' ]] && echo -e "$(ps -u $i |grep sshd |wc -l)" >> $on_user_rev
             [[ -e /etc/openvpn/openvpn-status.log ]] && echo -e "$(grep -E ,"$i", /etc/openvpn/openvpn-status.log | wc -l)" >> $on_user_rev
         done
         [[ $(paste -s -d + $on_user_rev | bc) -gt '0' ]] && _on="$(paste -s -d + $on_user_rev | bc)" || _on=0
@@ -1416,17 +1416,17 @@ fun_teste (){
     tuserdate=$(date '+%C%y/%m/%d' -d " +2 days")
     useradd -M -N -s /bin/false $usuario -e $tuserdate > /dev/null 2>&1
     (echo "$senha";echo "$senha") | passwd $usuario > /dev/null 2>&1
-    echo "$senha" > /etc/INOVE SSH/senha/$usuario
+    echo "$senha" > /etc/SSHPlus/senha/$usuario
     echo "$usuario $limite" >> /root/usuarios.db
     echo "#!/bin/bash
 pkill -f "$usuario"
 userdel --force $usuario
 grep -v ^$usuario[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
-rm /etc/INOVE SSH/senha/$usuario > /dev/null 2>&1
+rm /etc/SSHPlus/senha/$usuario > /dev/null 2>&1
 rm $dir_teste
-rm -rf /etc/INOVE SSH/userteste/$usuario.sh" > /etc/INOVE SSH/userteste/$usuario.sh
-chmod +x /etc/INOVE SSH/userteste/$usuario.sh
-at -f /etc/INOVE SSH/userteste/$usuario.sh now + $t_time hour > /dev/null 2>&1
+rm -rf /etc/SSHPlus/userteste/$usuario.sh" > /etc/SSHPlus/userteste/$usuario.sh
+chmod +x /etc/SSHPlus/userteste/$usuario.sh
+at -f /etc/SSHPlus/userteste/$usuario.sh now + $t_time hour > /dev/null 2>&1
 
 [[ "$t_time" == '1' ]] && hrs="hora" || hrs="horas"
 if [[ "$(ls /etc/bot/arquivos| wc -l)" != '0' ]]; then
@@ -1519,14 +1519,14 @@ fun_backauto () {
         fi
         if [[ "$back_opc" = "ativar" ]]; then
             [[ $(crontab -l|grep -c "userbackup") = '0' ]] && (crontab -l 2>/dev/null; echo "0 */6 * * * /bin/userbackup 1") | crontab -
-            [[ ! -d /etc/INOVE SSH/backups ]] && mkdir /etc/INOVE SSH/backups
+            [[ ! -d /etc/SSHPlus/backups ]] && mkdir /etc/SSHPlus/backups
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
             --text "$(echo -e "♻️ BACKUP AUTOMATICO ♻️\n\nATIVADO COM SUCESSO ✅")" \
             --parse_mode html
             return 0
         elif [[ "$back_opc" = "desativar" ]]; then
             [[ $(crontab -l|grep -c "userbackup") != '0' ]] && crontab -l | grep -v 'userbackup' | crontab -
-            [[ -d /etc/INOVE SSH/backups ]] && rm -rf /etc/INOVE SSH/backups
+            [[ -d /etc/SSHPlus/backups ]] && rm -rf /etc/SSHPlus/backups
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
             --text "$(echo -e "♻️ BACKUP AUTOMATICO ♻️\n\nDESATIVADO COM SUCESSO ✅")" \
             --parse_mode html
@@ -1542,8 +1542,8 @@ fun_backauto () {
 
 while :
 do
-   [[ -d "/etc/INOVE SSH/backups" ]] && {
-    [[ -e "/etc/INOVE SSH/backups/backup.vps" ]] && {
+   [[ -d "/etc/SSHPlus/backups" ]] && {
+    [[ -e "/etc/SSHPlus/backups/backup.vps" ]] && {
         backup_auto
     }
    }
@@ -1568,7 +1568,7 @@ do
                 [[ "${comando[0]}" = "01" || "${comando[0]}" = "/criarusuario" ]] && fun_adduser
                 [[ "${comando[0]}" = "02" || "${comando[0]}" = "/remover" ]] && fun_deluser
                 [[ "${comando[0]}" = "03" || "${comando[0]}" = "/infousers" ]] && ver_users
-                [[ "${comando[0]}" = "04" || "${comando[0]}" = "/monitor" ]] && monitor_@henrysc102
+                [[ "${comando[0]}" = "04" || "${comando[0]}" = "/monitor" ]] && monitor_ssh2
                 [[ "${comando[0]}" = "05" || "${comando[0]}" = "/infovps" ]] && infovps
                 [[ "${comando[0]}" = "06" || "${comando[0]}" = "/payload_vivo" ]] && payload_vivo
                 [[ "${comando[0]}" = "07" || "${comando[0]}" = "/payload_oi" ]] && payload_oi
@@ -1946,10 +1946,10 @@ fi
                         }
                         echo "User: ${message_text[$id]}" >> $CAD_ARQ
                         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                            --text 'Quantas @henrysc10 ele pode criar:' \
+                            --text 'Quantas SSH ele pode criar:' \
                             --reply_markup "$(ShellBot.ForceReply)"
                         ;;
-                    'Quantas @henrysc10 ele pode criar:')
+                    'Quantas SSH ele pode criar:')
                         echo "Limite: ${message_text[$id]}" >> $CAD_ARQ
                         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
                             --text 'Quantos dias de acesso:' \
@@ -2004,7 +2004,7 @@ fi
                         }
                         [[ -d "/etc/bot/revenda/$_Var1" ]] && {
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                            --text 'Informe o Limite @henrysc10:' \
+                            --text 'Informe o Limite SSH:' \
                             --reply_markup "$(ShellBot.ForceReply)"
                         } || {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
@@ -2013,7 +2013,7 @@ fi
                                 break
                         }
                         ;;
-                    'Informe o Limite @henrysc10:')
+                    'Informe o Limite SSH:')
                         [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
                                 --text "$(echo -e "❌ Erro ! \n\nUltilize apenas numeros [EX: 1]")" \
@@ -2077,7 +2077,7 @@ fi
                         if [[ -d /etc/bot/revenda/$_VAR1 ]]; then
                             susp_rev $_VAR1
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "⚠️ $_VAR1 e as contas @henrysc10 dele\nForam Suspensos\n\nPara reativar altere a Data dele")" \
+                                --text "$(echo -e "⚠️ $_VAR1 e as contas SSH dele\nForam Suspensos\n\nPara reativar altere a Data dele")" \
                                 --parse_mode html
                             break
                         elif [[ -d /etc/bot/suspensos/$_VAR1 ]]; then

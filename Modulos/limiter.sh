@@ -28,7 +28,7 @@ fun_multilogin () {
 		while read _users; do
 			user="$(echo $_users | cut -d' ' -f1)"
 			limit="$(echo $_users | cut -d' ' -f2)"
-			con@henrysc10="$(ps -u $user | grep @henrysc10d | wc -l)"
+			conssh="$(ps -u $user | grep sshd | wc -l)"
 			[[ -e /etc/default/dropbear ]] && {
 				condrop="$(fun_drop | grep -E "$user" | wc -l)"
 				piddrop="$(fun_drop | grep -E "$user" | tail -1 | awk '{print $ NF}')"
@@ -48,10 +48,10 @@ fun_multilogin () {
 					done <<< "$listpid"
 				}
 			}
-			[[ "$con@henrysc10" -gt "$limit" ]] && {
-				pidkill=$(($con@henrysc10 - $limit))
-				for pid@henrysc10 in `(ps -u $user |grep @henrysc10d| tail -n $pidkill |awk '{print $1}')`; do
-					kill -9 "$pid@henrysc10"
+			[[ "$conssh" -gt "$limit" ]] && {
+				pidkill=$(($conssh - $limit))
+				for pidssh in `(ps -u $user |grep sshd| tail -n $pidkill |awk '{print $1}')`; do
+					kill -9 "$pidssh"
 				done
 	        }
 	    done < "$database"

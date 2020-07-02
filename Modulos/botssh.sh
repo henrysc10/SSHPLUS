@@ -30,32 +30,32 @@ tput cnorm
 fun_botOnOff () {
       [[ $(ps x | grep "bot_plus"|grep -v grep | wc -l) = '0' ]] && {
           clear
-          echo -e "\E[44;1;37m             INSTALADOR BOT INOVE SSH                \E[0m\n"
+          echo -e "\E[44;1;37m             INSTALADOR BOT SSHPLUS                \E[0m\n"
           echo -ne "\033[1;32mINFORME SEU TOKEN:\033[1;37m "; read tokenbot
   	    echo ""
   	    echo -ne "\033[1;32mINFORME SEU ID:\033[1;37m "; read iduser
           clear
-          echo -e "\033[1;32mINICIANDO BOT INOVE SSH \033[0m\n"
+          echo -e "\033[1;32mINICIANDO BOT SSHPLUS \033[0m\n"
           fun_bot1 () {
-  	        [[ ! -e "/etc/INOVE SSH/ShellBot.sh" ]] && wget -qO- https://raw.githubusercontent.com/shellscriptx/shellbot/master/ShellBot.sh > /etc/INOVE SSH/ShellBot.sh
-  	        cd /etc/INOVE SSH
+  	        [[ ! -e "/etc/SSHPlus/ShellBot.sh" ]] && wget -qO- https://raw.githubusercontent.com/shellscriptx/shellbot/master/ShellBot.sh > /etc/SSHPlus/ShellBot.sh
+  	        cd /etc/SSHPlus
   	        screen -dmS bot_plus ./bot $tokenbot $iduser > /dev/null 2>&1
               [[ $(grep -wc "bot_plus" /etc/autostart) = '0' ]] && {
-		          echo -e "ps x | grep 'bot_plus' | grep -v 'grep' && echo 'ON' || cd /etc/INOVE SSH && sudo screen -dmS bot_plus ./bot $tokenbot $iduser && cd $HOME" >> /etc/autostart
+		          echo -e "ps x | grep 'bot_plus' | grep -v 'grep' && echo 'ON' || cd /etc/SSHPlus && sudo screen -dmS bot_plus ./bot $tokenbot $iduser && cd $HOME" >> /etc/autostart
 		      } || {
 		          sed -i '/bot_plus/d' /etc/autostart
-		          echo -e "ps x | grep 'bot_plus' | grep -v 'grep' && echo 'ON' || cd /etc/INOVE SSH && sudo screen -dmS bot_plus ./bot $tokenbot $iduser && cd $HOME" >> /etc/autostart
+		          echo -e "ps x | grep 'bot_plus' | grep -v 'grep' && echo 'ON' || cd /etc/SSHPlus && sudo screen -dmS bot_plus ./bot $tokenbot $iduser && cd $HOME" >> /etc/autostart
 		      }
 		      [[ $(crontab -l|grep -c "verifbot") = '0' ]] && (crontab -l 2>/dev/null; echo "@daily /bin/verifbot") | crontab -
   	        cd $HOME
           }
           fun_bar 'fun_bot1'
-          [[ $(ps x | grep "bot_plus"|grep -v grep | wc -l) != '0' ]] && echo -e "\n\033[1;32m BOT INOVE SSH ATIVADO !\033[0m" || echo -e "\n\033[1;31m ERRO! REANALISE SUAS INFORMACOES\033[0m"
+          [[ $(ps x | grep "bot_plus"|grep -v grep | wc -l) != '0' ]] && echo -e "\n\033[1;32m BOT SSHPLUS ATIVADO !\033[0m" || echo -e "\n\033[1;31m ERRO! REANALISE SUAS INFORMACOES\033[0m"
           sleep 3
           menu
       } || {
           clear
-          echo -e "\033[1;32mPARANDO BOT INOVE SSH... \033[0m\n"
+          echo -e "\033[1;32mPARANDO BOT SSHPLUS... \033[0m\n"
           fun_bot2 () {
               screen -r -S "bot_plus" -X quit
               screen -wipe 1>/dev/null 2>/dev/null
@@ -66,14 +66,14 @@ fun_botOnOff () {
               sleep 1
           }
           fun_bar 'fun_bot2'
-          echo -e "\n\033[1;32m \033[1;31mBOT INOVE SSH PARADO! \033[0m"
+          echo -e "\n\033[1;32m \033[1;31mBOT SSHPLUS PARADO! \033[0m"
           sleep 3
           menu
       }
 }
 
 fun_instbot () {
-echo -e "\E[44;1;37m             INSTALADOR BOT INOVE SSH                \E[0m\n"
+echo -e "\E[44;1;37m             INSTALADOR BOT SSHPLUS                \E[0m\n"
 echo -e "                 \033[1;33m[\033[1;31m!\033[1;33m] \033[1;31mATENCAO \033[1;33m[\033[1;31m!\033[1;33m]\033[0m"
 echo -e "\n\033[1;32m1° \033[1;37m- \033[1;33mPELO SEU TELEGRAM ACESSE OS SEGUINTES BOT\033[1;37m:\033[0m"
 echo -e "\n\033[1;32m2° \033[1;37m- \033[1;33mBOT \033[1;37m@BotFather \033[1;33mCRIE O SEU BOT \033[1;31mOPCAO: \033[1;37m/newbot\033[0m"
@@ -89,5 +89,5 @@ if [[ "$resposta" = 's' ]]; then
       menu
 fi
 }
-[[ -f "/etc/INOVE SSH/ShellBot.sh" ]] && fun_botOnOff || fun_instbot
+[[ -f "/etc/SSHPlus/ShellBot.sh" ]] && fun_botOnOff || fun_instbot
 #fim

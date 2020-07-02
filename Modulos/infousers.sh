@@ -10,8 +10,8 @@ if [[ $(grep -cw $users $HOME/usuarios.db) == "1" ]]; then
 else
     lim="1"
 fi
-if [[ -e "/etc/INOVE SSH/senha/$users" ]]; then
-    senha=$(cat /etc/INOVE SSH/senha/$users)
+if [[ -e "/etc/SSHPlus/senha/$users" ]]; then
+    senha=$(cat /etc/SSHPlus/senha/$users)
 else
     senha="Null"
 fi
@@ -39,8 +39,8 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 done
 echo ""
 _tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
-_ons=$(ps -x | grep @henrysc10d | grep -v root | grep priv | wc -l)
-[[ "$(cat /etc/INOVE SSH/Exp)" != "" ]] && _expuser=$(cat /etc/INOVE SSH/Exp) || _expuser="0"
+_ons=$(ps -x | grep sshd | grep -v root | grep priv | wc -l)
+[[ "$(cat /etc/SSHPlus/Exp)" != "" ]] && _expuser=$(cat /etc/SSHPlus/Exp) || _expuser="0"
 [[ -e /etc/openvpn/openvpn-status.log ]] && _onop=$(grep -c "10.8.0" /etc/openvpn/openvpn-status.log) || _onop="0"
 [[ -e /etc/default/dropbear ]] && _drp=$(ps aux | grep dropbear | grep -v grep | wc -l) _ondrp=$(($_drp - 1)) || _ondrp="0"
 _onli=$(($_ons + $_onop + $_ondrp))

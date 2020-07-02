@@ -1,15 +1,15 @@
 #!/bin/bash
 clear
-chk=$(cat /etc/@henrysc10/@henrysc10d_config | grep Banner)
+chk=$(cat /etc/ssh/sshd_config | grep Banner)
 [[ $(netstat -nltp|grep 'dropbear' | wc -l) != '0' ]] && {
-    local="/etc/banner@henrysc10"
-	[[ $(grep -wc $local /etc/default/dropbear) = '0' ]] && echo 'DROPBEAR_BANNER="/etc/banner@henrysc10"' >>  /etc/default/dropbear
+    local="/etc/bannerssh"
+	[[ $(grep -wc $local /etc/default/dropbear) = '0' ]] && echo 'DROPBEAR_BANNER="/etc/bannerssh"' >>  /etc/default/dropbear
 }
 [[ "$(echo "$chk" | grep -v '#Banner' | grep Banner)" != "" ]] && {
 	local=$(echo "$chk" |grep -v "#Banner" | grep Banner | awk '{print $2}')
 } || {
-    local="/etc/banner@henrysc10"
-    [[ $(grep -wc $local /etc/@henrysc10/@henrysc10d_config) = '0' ]] && echo "Banner /etc/banner@henrysc10" >> /etc/@henrysc10/@henrysc10d_config
+    local="/etc/bannerssh"
+    [[ $(grep -wc $local /etc/ssh/sshd_config) = '0' ]] && echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
 }
 echo -e "\E[44;1;37m             BANNER             \E[0m"
 echo ""
@@ -74,7 +74,7 @@ elif [[ "$ban_cor" = "9" ]] || [[ "$ban_cor" = "09" ]]; then
 echo "<h$_size><font color='black'>$msg1" >> $local
 elif [[ "$ban_cor" = "10" ]]; then
 echo "<h$_size>$msg1</h$_size>" >> $local
-/etc/init.d/@henrysc10 restart > /dev/null 2>&1
+/etc/init.d/ssh restart > /dev/null 2>&1
 echo -e "\n\033[1;32mBANNER DEFINIDO !\033[0m"
 sleep 2
 menu
@@ -84,13 +84,13 @@ echo -e "\n\033[1;31mOpcao invalida !\033[0m"
 	banner
 fi
 echo "</font></h$_size>" >> $local
-service @henrysc10 restart > /dev/null 2>&1 && service dropbear restart > /dev/null 2>&1
+service ssh restart > /dev/null 2>&1 && service dropbear restart > /dev/null 2>&1
 echo -e "\n\033[1;32mBANNER DEFINIDO !\033[0m"
 unset ban_cor
 elif [[ "$resp" = "2" ]]; then
 	echo " " > $local
 	echo -e "\n\033[1;32mBANNER EXCLUIDO !\033[0m"
-	service @henrysc10 restart > /dev/null 2>&1 && service dropbear restart > /dev/null 2>&1
+	service ssh restart > /dev/null 2>&1 && service dropbear restart > /dev/null 2>&1
 	sleep 2
 	menu
 elif [[ "$resp" = "3" ]]; then

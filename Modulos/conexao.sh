@@ -10,7 +10,7 @@ comando[0]="$1"
 comando[1]="$2"
  (
 [[ -e $HOME/fim ]] && rm $HOME/fim
-[[ ! -d /etc/INOVE SSH ]] && rm -rf /bin/menu
+[[ ! -d /etc/SSHPlus ]] && rm -rf /bin/menu
 ${comando[0]} > /dev/null 2>&1
 ${comando[1]} > /dev/null 2>&1
 touch $HOME/fim
@@ -123,7 +123,7 @@ echo ".claro.com.br/
 echo "acl url1 dstdomain -i 127.0.0.1
 acl url2 dstdomain -i localhost
 acl url3 dstdomain -i $ipdovps
-acl url4 dstdomain -i /INOVE SSH?
+acl url4 dstdomain -i /SSHPLUS?
 acl payload url_regex -i "$var_pay"
 acl all src 0.0.0.0/0
 
@@ -141,18 +141,18 @@ echo -e "http_port $Pts" >> $var_sqd
 done
 echo -e "
 #Nome squid
-visible_hostname INOVE SSH 
+visible_hostname SSHPLUS 
 via off
 forwarded_for off
 pipeline_prefetch off" >> $var_sqd
 sqd_conf () {
 if [[ -d "/etc/squid/" ]]; then
 squid -k reconfigure
-service @henrysc10 restart
+service ssh restart
 service squid restart
 elif [[ -d "/etc/squid3/" ]]; then
 squid3 -k reconfigure
-service @henrysc10 restart
+service ssh restart
 service squid3 restart
 fi
 }
@@ -333,7 +333,7 @@ fun_drop () {
 			fun_bar 'sleep 3'
 			echo -e "\n\033[1;32mREINICIANDO DROPBEAR!"
 			echo ""
-		    fun_bar 'service dropbear restart' 'service @henrysc10 restart'
+		    fun_bar 'service dropbear restart' 'service ssh restart'
 			echo -e "\n\033[1;32mPORTA ALTERADA COM SUCESSO!"
 			sleep 3
 			clear
@@ -394,10 +394,10 @@ fun_drop () {
 			echo -e "\033[1;32mCONFIGURANDO PORTA DROPBEAR !\033[0m"
 			echo ""
 			fun_bar 'fun_ports'
-			grep -v "^PasswordAuthentication yes" /etc/@henrysc10/@henrysc10d_config > /tmp/passlogin && mv /tmp/passlogin /etc/@henrysc10/@henrysc10d_config
-			echo "PasswordAuthentication yes" >> /etc/@henrysc10/@henrysc10d_config
-			grep -v "^PermitTunnel yes" /etc/@henrysc10/@henrysc10d_config > /tmp/@henrysc10 && mv /tmp/@henrysc10 /etc/@henrysc10/@henrysc10d_config
-			echo "PermitTunnel yes" >> /etc/@henrysc10/@henrysc10d_config
+			grep -v "^PasswordAuthentication yes" /etc/ssh/sshd_config > /tmp/passlogin && mv /tmp/passlogin /etc/ssh/sshd_config
+			echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+			grep -v "^PermitTunnel yes" /etc/ssh/sshd_config > /tmp/ssh && mv /tmp/ssh /etc/ssh/sshd_config
+			echo "PermitTunnel yes" >> /etc/ssh/sshd_config
 			echo ""
 			echo -e "\033[1;32mFINALIZANDO INSTALACAO !\033[0m"
 			echo ""
@@ -524,7 +524,7 @@ else
     echo ""
     fun_finssl () {
     service stunnel4 restart
-    service @henrysc10 restart
+    service ssh restart
     /etc/init.d/stunnel4 restart
     }
     fun_bar 'fun_finssl' 'service stunnel4 restart'
@@ -1050,7 +1050,7 @@ else
 	./easyrsa --batch build-ca nopass
 	./easyrsa gen-dh
 	./easyrsa build-server-full server nopass
-	./easyrsa build-client-full INOVE SSH nopass
+	./easyrsa build-client-full SSHPLUS nopass
 	./easyrsa gen-crl
 	# Move the stuff we need
 	cp pki/ca.crt pki/private/ca.key pki/dh.pem pki/issued/server.crt pki/private/server.key /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn
@@ -1208,7 +1208,7 @@ proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
 setenv opt method GET
-remote /INOVE SSH? $porta
+remote /SSHPLUS? $porta
 http-proxy-option CUSTOM-HEADER Host portalrecarga.vivo.com.br/recarga
 http-proxy $IP 80
 resolv-retry 5
@@ -1225,7 +1225,7 @@ auth-user-pass
 keepalive 10 120
 float" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
-	newclient "INOVE SSH"
+	newclient "SSHPLUS"
 	echo ""
 	echo -e "\033[1;32mOPENVPN INSTALADO COM SUCESSO\033[0m"
 fi
@@ -1297,12 +1297,12 @@ fun_socks () {
 		    verif_ptrs $porta
 		    fun_inisocks () {
 		    	sleep 1
-		    	screen -dmS proxy python /etc/INOVE SSH/proxy.py $porta
+		    	screen -dmS proxy python /etc/SSHPlus/proxy.py $porta
 		    	[[ $(grep -wc "proxy.py" /etc/autostart) = '0' ]] && {
-		    		echo -e "netstat -tlpn | grep python > /dev/null && echo 'ON' || screen -dmS proxy python /etc/INOVE SSH/proxy.py $porta" >> /etc/autostart
+		    		echo -e "netstat -tlpn | grep python > /dev/null && echo 'ON' || screen -dmS proxy python /etc/SSHPlus/proxy.py $porta" >> /etc/autostart
 		    	} || {
 		            sed -i '/proxy.py/d' /etc/autostart
-		            echo -e "netstat -tlpn | grep python > /dev/null && echo 'ON' || screen -dmS proxy python /etc/INOVE SSH/proxy.py $porta" >> /etc/autostart
+		            echo -e "netstat -tlpn | grep python > /dev/null && echo 'ON' || screen -dmS proxy python /etc/SSHPlus/proxy.py $porta" >> /etc/autostart
 		        }
 		    }
 		    echo ""
@@ -1336,7 +1336,7 @@ fun_socks () {
 			echo ""
 			abrirptsks () {
 				sleep 1
-				screen -dmS proxy python /etc/INOVE SSH/proxy.py $porta
+				screen -dmS proxy python /etc/SSHPlus/proxy.py $porta
 				sleep 1
 			}
 			fun_bar 'abrirptsks'
@@ -1353,7 +1353,7 @@ fun_socks () {
 	elif [[ "$resposta" = '3' ]]; then
 		if ps x | grep proxy.py|grep -v grep 1>/dev/null 2>/dev/null; then
 			clear
-			msgsocks=$(cat /etc/INOVE SSH/proxy.py |grep -E "MSG =" | awk -F = '{print $2}' |cut -d "'" -f 2)
+			msgsocks=$(cat /etc/SSHPlus/proxy.py |grep -E "MSG =" | awk -F = '{print $2}' |cut -d "'" -f 2)
 			echo -e "\E[44;1;37m             PROXY SOCKS              \E[0m"
 			echo ""
 			echo -e "\033[1;33mSTATUS: \033[1;32m$msgsocks"
@@ -1402,11 +1402,11 @@ fun_socks () {
 				cor_sts='null'
 			fi
 			fun_msgsocks () {
-				msgsocks2=$(cat /etc/INOVE SSH/proxy.py |grep "MSG =" | awk -F = '{print $2}')
-				sed -i "s/$msgsocks2/ '$msgg'/g" /etc/INOVE SSH/proxy.py
+				msgsocks2=$(cat /etc/SSHPlus/proxy.py |grep "MSG =" | awk -F = '{print $2}')
+				sed -i "s/$msgsocks2/ '$msgg'/g" /etc/SSHPlus/proxy.py
 				sleep 1
-				cor_old=$(grep 'color=' /etc/INOVE SSH/proxy.py | cut -d '"' -f2)
-				sed -i "s/$cor_old/$cor_sts/g" /etc/INOVE SSH/proxy.py
+				cor_old=$(grep 'color=' /etc/SSHPlus/proxy.py | cut -d '"' -f2)
+				sed -i "s/$cor_old/$cor_sts/g" /etc/SSHPlus/proxy.py
 
 			}
 			echo ""
@@ -1422,7 +1422,7 @@ fun_socks () {
 					screen -wipe > /dev/null
 					_Ptsks="$(cat /tmp/Pt_sks)"
 					sleep 1
-					screen -dmS proxy python /etc/INOVE SSH/proxy.py $_Ptsks
+					screen -dmS proxy python /etc/SSHPlus/proxy.py $_Ptsks
 					rm /tmp/Pt_sks
 				fi
 			}
@@ -1454,9 +1454,9 @@ fun_socks () {
 
 }
 
-fun_open@henrysc10 () {
+fun_openssh () {
 	clear
-	echo -e "\E[44;1;37m            OPEN@henrysc10             \E[0m\n"
+	echo -e "\E[44;1;37m            OPENSSH             \E[0m\n"
 	echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mADICIONAR PORTA\033[1;31m
 [\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREMOVER PORTA\033[1;31m
 [\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
@@ -1464,7 +1464,7 @@ fun_open@henrysc10 () {
 	echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "; read resp
 	if [[ "$resp" = '1' ]]; then
 		clear
-		echo -e "\E[44;1;37m         ADICIONAR PORTA AO @henrysc10         \E[0m\n"
+		echo -e "\E[44;1;37m         ADICIONAR PORTA AO SSH         \E[0m\n"
 		echo -ne "\033[1;32mQUAL PORTA DESEJA ADICIONAR \033[1;33m?\033[1;37m "; read pt
 		if [[ -z "$pt" ]]; then
 			echo -e "\n\033[1;31mPorta invalida!"
@@ -1472,35 +1472,35 @@ fun_open@henrysc10 () {
 			fun_conexao
 		fi
 		verif_ptrs $pt
-		echo -e "\n\033[1;32mADICIONANDO PORTA AO @henrysc10\033[0m"
+		echo -e "\n\033[1;32mADICIONANDO PORTA AO SSH\033[0m"
 		echo ""
-		fun_addp@henrysc10 () {
-			echo "Port $pt" >> /etc/@henrysc10/@henrysc10d_config
-			service @henrysc10 restart
+		fun_addpssh () {
+			echo "Port $pt" >> /etc/ssh/sshd_config
+			service ssh restart
 		}
-		fun_bar 'fun_addp@henrysc10'
+		fun_bar 'fun_addpssh'
 		echo -e "\n\033[1;32mPORTA ADICIONADA COM SUCESSO\033[0m"
 		sleep 3
 		fun_conexao
 	elif [[ "$resp" = '2' ]]; then
 		clear
-		echo -e "\E[41;1;37m         REMOVER PORTA DO @henrysc10         \E[0m"
+		echo -e "\E[41;1;37m         REMOVER PORTA DO SSH         \E[0m"
 		echo -e "\n\033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mPORTA PADRAO \033[1;37m22 \033[1;33mCUIDADO !\033[0m"
-		echo -e "\n\033[1;33mPORTAS EM USO: \033[1;37m$(grep 'Port' /etc/@henrysc10/@henrysc10d_config|cut -d' ' -f2 |grep -v 'no' |xargs)\n"
+		echo -e "\n\033[1;33mPORTAS EM USO: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config|cut -d' ' -f2 |grep -v 'no' |xargs)\n"
 		echo -ne "\033[1;32mQUAL PORTA DESEJA REMOVER \033[1;33m?\033[1;37m "; read pt
 		if [[ -z "$pt" ]]; then
 			echo -e "\n\033[1;31mPorta invalida!"
 			sleep 3
 			fun_conexao
 		fi
-		[[ $(grep -wc "$pt" '/etc/@henrysc10/@henrysc10d_config') != '0' ]] && {
-			echo -e "\n\033[1;32mREMOVENDO PORTA DO @henrysc10\033[0m"
+		[[ $(grep -wc "$pt" '/etc/ssh/sshd_config') != '0' ]] && {
+			echo -e "\n\033[1;32mREMOVENDO PORTA DO SSH\033[0m"
 			echo ""
-			fun_delp@henrysc10 () {
-				sed -i "/Port $pt/d" /etc/@henrysc10/@henrysc10d_config
-				service @henrysc10 restart
+			fun_delpssh () {
+				sed -i "/Port $pt/d" /etc/ssh/sshd_config
+				service ssh restart
 			}
-			fun_bar 'fun_delp@henrysc10'
+			fun_bar 'fun_delpssh'
 			echo -e "\n\033[1;32mPORTA REMOVIDA COM SUCESSO\033[0m"
 			sleep 3
 			fun_conexao
@@ -1532,7 +1532,7 @@ fun_sslh () {
             [[ -e "/etc/stunnel/stunnel.conf" ]] && ptssl="$(netstat -nplt |grep 'stunnel' | awk {'print $4'} |cut -d: -f2 |xargs)" || ptssl='3128'
             [[ -e "/etc/openvpn/server.conf" ]] && ptvpn="$(netstat -nplt |grep 'openvpn' |awk {'print $4'} |cut -d: -f2 |xargs)" || ptvpn='1194'
             DEBIAN_FRONTEND=noninteractive apt-get -y install sslh
-            echo -e "#Modo autónomo\n\nRUN=yes\n\nDAEMON=/usr/sbin/sslh\n\nDAEMON_OPTS='--user sslh --listen 0.0.0.0:443 --@henrysc10 127.0.0.1:22 --ssl 127.0.0.1:$ptssl --http 127.0.0.1:80 --openvpn 127.0.0.1:$ptvpn --pidfile /var/run/sslh/sslh.pid'" > /etc/default/sslh
+            echo -e "#Modo autónomo\n\nRUN=yes\n\nDAEMON=/usr/sbin/sslh\n\nDAEMON_OPTS='--user sslh --listen 0.0.0.0:443 --ssh 127.0.0.1:22 --ssl 127.0.0.1:$ptssl --http 127.0.0.1:80 --openvpn 127.0.0.1:$ptvpn --pidfile /var/run/sslh/sslh.pid'" > /etc/default/sslh
             /etc/init.d/sslh start && service sslh start
         }
         echo -e "\n\033[1;32mINSTALANDO O SSLH !\033[0m\n"
@@ -1574,10 +1574,10 @@ x="ok"
 fun_conexao () {
 while true $x != "ok"
 do
-[[ ! -e '/home/INOVE SSH' ]] && exit 0
+[[ ! -e '/home/sshplus' ]] && exit 0
 clear
 echo -e "\E[44;1;37m                MODO DE CONEXAO                 \E[0m\n"
-echo -e "\033[1;32mSERVICO: \033[1;33mOPEN@henrysc10 \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/@henrysc10/@henrysc10d_config|cut -d' ' -f2 |grep -v 'no' |xargs)" && sts6="\033[1;32m◉ "
+echo -e "\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config|cut -d' ' -f2 |grep -v 'no' |xargs)" && sts6="\033[1;32m◉ "
 
 [[ "$(netstat -nltp|grep 'sslh' |wc -l)" != '0' ]] && {
 	echo -e "\033[1;32mSERVICO: \033[1;33mSSLH: \033[1;32mPORTA: \033[1;37m$(netstat -nplt |grep 'sslh' |awk {'print $4'} |cut -d: -f2 |xargs)"
@@ -1619,7 +1619,7 @@ echo -e "\033[1;32mSERVICO: \033[1;33mOPEN@henrysc10 \033[1;32mPORTA: \033[1;37m
 }
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo ""
-echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mOPEN@henrysc10 $sts6\033[1;31m
+echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mOPENSSH $sts6\033[1;31m
 [\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mSQUID PROXY $sts1\033[1;31m
 [\033[1;36m03\033[1;31m] \033[1;37m• \033[1;33mDROPBEAR $sts2\033[1;31m
 [\033[1;36m04\033[1;31m] \033[1;37m• \033[1;33mOPENVPN $sts5\033[1;31m
@@ -1637,7 +1637,7 @@ tput cnorm
 clear
 case $x in
 	1|01)
-	fun_open@henrysc10
+	fun_openssh
 	;;
 	2|02)
 	fun_squid
@@ -1674,8 +1674,8 @@ done
 }
 fun_conexao
 else
-	rm -rf /bin/criarusuario /bin/expcleaner /bin/@henrysc10limiter /bin/addhost /bin/listar /bin/@henrysc10monitor /bin/ajuda /bin/menu /bin/OpenVPN /bin/userbackup /bin/tcpspeed /bin/badvpn /bin/otimizar /bin/speedtest /bin/trafego /bin/banner /bin/limit /bin/Usercreate /bin/senharoot /bin/reiniciarservicos /bin/reiniciarsistema /bin/attscript /bin/criarteste /bin/socks  /bin/DropBear /bin/alterarlimite /bin/alterarsenha /bin/remover /bin/detalhes /bin/mudardata /bin/bot@henrysc10 /bin/versao > /dev/null 2>&1
-    rm -rf /etc/INOVE SSH > /dev/null 2>&1
+	rm -rf /bin/criarusuario /bin/expcleaner /bin/sshlimiter /bin/addhost /bin/listar /bin/sshmonitor /bin/ajuda /bin/menu /bin/OpenVPN /bin/userbackup /bin/tcpspeed /bin/badvpn /bin/otimizar /bin/speedtest /bin/trafego /bin/banner /bin/limit /bin/Usercreate /bin/senharoot /bin/reiniciarservicos /bin/reiniciarsistema /bin/attscript /bin/criarteste /bin/socks  /bin/DropBear /bin/alterarlimite /bin/alterarsenha /bin/remover /bin/detalhes /bin/mudardata /bin/botssh /bin/versao > /dev/null 2>&1
+    rm -rf /etc/SSHPlus > /dev/null 2>&1
     clear
     exit 0
 fi
