@@ -1636,7 +1636,7 @@ fi
                         sizemax=$(echo -e ${#message_text[$id]})
                         [[ "$sizemax" -gt '8' ]] && {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ Erro !\n\nUse no maximo 8 caracteres\n[EX: crazy]")" \
+                                --text "$(echo -e "❌ Erro !\n\nUse no maximo 8 caracteres\n[EX: Henry]")" \
                                 --parse_mode html
                             > $CAD_ARQ
                             break

